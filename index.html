@@ -7,7 +7,7 @@
 	<body>
 		<script type="text/javascript">
 			window.onload = function(){
-				var gmae = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, render: render } );
+				var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, render: render } );
 				
 				var character;
 				var mm;
@@ -22,7 +22,7 @@
 				}
 
 				function render() {
-					gmae.debug.geom(character,'#0f00ff');
+					game.debug.geom(character,'#0f00ff');
 				}
 			};
 
