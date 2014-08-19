@@ -21,7 +21,7 @@
 				function create() {
 					character = new Phaser.Rectangle(380, 280, 40, 40);
 					mm = game.add.sprite(100, 99, 'mm');
-					mm.anchor.setTo(0.5);
+					mm.anchor.setTo(0.5, 0.5);
 
 					cursors = game.input.keyboard.createCursorKeys();
 				}
@@ -30,6 +30,11 @@
 					if (cursors.up.isDown === true) {
 						mm.rotation += 0.05;
 					}
+
+					if (cursors.down.isup === true) {
+						mm.rotation -= 0.05;
+					}
+					
 					
 				}
 
