@@ -21,13 +21,14 @@
 				function create() {
 					character = new Phaser.Rectangle(380, 280, 40, 40);
 					mm = game.add.sprite(100, 99, 'mm');
+					mm.anchor.setTo(0.5);
 
 					cursors = game.input.keyboard.createCursorKeys();
 				}
 
 				function update() {
 					if (cursors.up.isDown === true) {
-						mm.rotation +=0.05;
+						mm.rotation += 0.05;
 					}
 					
 				}
