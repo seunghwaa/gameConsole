@@ -16,6 +16,11 @@
 				
 				function preload() {
 					game.load.image('mm', 'img/mm.png');
+
+					game.load.image('up', 'img/up.png');
+					game.load.image('down', 'img/down.png');
+					game.load.image('left', 'img/left.png');
+					game.load.image('right', 'img/right.png');
 				}
 
 				function create() {
@@ -24,6 +29,11 @@
 					mm.anchor.setTo(0.5, 0.5);
 
 					cursors = game.input.keyboard.createCursorKeys();
+
+					up = game.add.sprite(50, 50, 'up');
+					down = game.add.sprite(50, 50, 'down');
+					left = game.add.sprite(50, 50, 'left');
+					right = game.add.sprite(50, 50, 'right');
 				}
 
 				function update() {
