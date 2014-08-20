@@ -1,0 +1,9 @@
+{
+	"name": "game-console",
+	"version": "0.0.1",
+	"description": "game controller app",
+	"dependencies": {
+		"express": "^4.8.5",
+		"socket.io": "^1.0.6"
+	}
+}
