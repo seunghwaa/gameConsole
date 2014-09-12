@@ -9,28 +9,47 @@
 
 	<script type="text/javascript">
 	window.onload = function(){
-
+		
 		var socket = io();
+		socket.emit('identify', 'viewer');
+
+		
+
+
 		socket.on('move', function(msg){
-			console.log('move' + msg);
-			if(msg === 'up'){
+			console.log('move: ' + msg.direction + 'from userid: ' + msg.userid);
+			var mm = mms[msg.userid];
+			if(msg.direction === 'up'){
 				mm.y = mm.y - 30;
 			} //node.js에 up이라는 msg(message)가 뜨면 y축으로 -30으로 이동하라
-			else if(msg === 'down'){
+			else if(msg.direction === 'down'){
 				mm.y = mm.y + 30;
 			}
-			else if(msg === 'left'){
+			else if(msg.direction === 'left'){
 				mm.x = mm.x - 30;
 			}
-			else if(msg === 'right'){
+			else if(msg.direction === 'right'){
 				mm.x = mm.x + 30;
 			}
 		}); //io는  socket보다 큰 영역. 전체 서버에 보낼땐 io사용. node.js에 보낸 메세지 io서버에 보내기
 
+		socket.on('addmm', function(userid){
+			addmm(userid);
+		});
+
+		socket.on('destroymm', function(userid){
+    		var mm = mms[userid];
+    		mm.destroy();
+		});
+
+		
+		
+		
+		
 		var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render } );
 
 		
-		var mm;
+		var mms = []; //캐릭터 여러개(버섯들) 각각으로 움직일때 _배열
 
 		
 
@@ -39,13 +58,8 @@
 		}
 
 		function create() {
-					//character = new Phaser.Rectangle(380, 280, 40, 40);
-			mm = game.add.sprite(400, 300, 'mm');
-			mm.anchor.setTo(0.5, 0.5);
-
-			
-				
 		}
+
 //(방향)마우스 클릭
 		function moveUp(){
 		//mm.y -= 5;
@@ -66,6 +80,7 @@
 		//mm.x += 5;
 		socket.emit('move', 'right');
 		}
+
 
  //(방향)키보드
 	 	function update() {
@@ -101,6 +116,16 @@
 		function render() {
 			//game.debug.geom(character,'#0f00ff');
 		}
+
+		function addmm(userid) {
+			var x = Math.floor(Math.random() * 700);
+			var y = Math.floor(Math.random() * 500);
+			mm = game.add.sprite(x, y, 'mm');
+			mm.anchor.setTo(0.5, 0.5);
+
+			mms[userid] = mm; //배열
+		}
+
 	};
 
 			// $
