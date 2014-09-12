@@ -10,7 +10,11 @@
 	<script type="text/javascript">
 	window.onload = function(){
 
+		
+
 		var socket = io();
+		
+		socket.emit('identify', 'controller');
 		/*socket.on('move', function(msg){
 			console.log('move' + msg);
 			if(msg === 'up'){
@@ -58,22 +62,34 @@
 //(방향)마우스 클릭
 		function moveUp(){
 		//mm.y -= 5;
-		socket.emit('move', 'up'); //마우스 클릭 시, node.js에 move:up message보내기
+		var msg = {};
+    	msg.direction = 'up';
+    	socket.emit('move', msg);
+		//socket.emit('move', 'up'); //마우스 클릭 시, node.js에 move:up message보내기
 		}
 					
 		function moveDown(){
 		//mm.y += 5;
-		socket.emit('move', 'down');
+		var msg = {};
+    	msg.direction = 'down';
+    	socket.emit('move', msg);
+		//socket.emit('move', 'down');
 		}
 
 		function moveLeft(){
 		//mm.x -= 5;
-		socket.emit('move', 'left');
+		var msg = {};
+    	msg.direction = 'left';
+    	socket.emit('move', msg);
+		//socket.emit('move', 'left');
 		}	
 
 		function moveRight(){
 		//mm.x += 5;
-		socket.emit('move', 'right');
+		var msg = {};
+    	msg.direction = 'right';
+    	socket.emit('move', msg);
+		//socket.emit('move', 'right');
 		}
 
  //(방향)키보드
